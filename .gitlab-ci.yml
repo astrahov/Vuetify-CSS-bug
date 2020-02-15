@@ -1,0 +1,14 @@
+stages:
+  - deploy
+
+vue build:
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    - rm -fr /home/bitrix/ext_www/vue-pwa.venus.xamtal.ru/public/vue-pwa/
+    - mv dist /home/bitrix/ext_www/vue-pwa.venus.xamtal.ru/public/vue-pwa/
+  when: always
+  only:
+    refs:
+      - master
